@@ -7,7 +7,11 @@ const router = express.Router();
 
 // * Routes With Files
 // * routs + middleware + endpoints logical function call
+
+// ✅✅✅ Create Operation
 router.post("/registration", upload.single("picture"), registration);
+
+// 🟩🟩🟩 Read Operation 
 router.post("/login", login);
 
 export default router;

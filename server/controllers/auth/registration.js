@@ -9,7 +9,6 @@ import bcrypt from "bcrypt";
 const registration = async (req, res) => {
 
     try {
-
         // these data come from frontend by user input at UI input field...
         const {
             firstName,

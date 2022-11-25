@@ -10,7 +10,6 @@ import bcrypt from "bcrypt";
 const login = async (req, res) => {
 
     try {
-
         const { email, password : userInputPassword } = req.body;
 
         // find user info from mongodb database...
@@ -20,6 +19,7 @@ const login = async (req, res) => {
         if (!user) return res.status(400).json({ msg: "User does not exist. " });
 
         const isMatch = await bcrypt.compare(userInputPassword, user.password);
+
         // if password not match...
         if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 

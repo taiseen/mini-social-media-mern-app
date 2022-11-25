@@ -1,17 +1,17 @@
-> 23 Mov 2022
+> 23 - Nov - 2022
 
 # Mini Social Media MERN App
 
-## Lib used at | Frontend
+## Frontend | lib used...
 * React
 * Material UI
 * Redux Toolkit
-* Redux-persist
+* Redux Persist
 * Formik
 * Yup
 * React-dropzone
 
-## Lib used at | Backend
+## Backend | lib used...
 * Express
 * Nodemon
 * Dotenv
@@ -25,7 +25,6 @@
 * Morgan
 * Multer
 * Multer-gridfs-storage
-
 
 
 <!-- 

@@ -1,4 +1,4 @@
-
+> 23 - Nov - 2022
 # Server Site Dependencies...
 
 |No| Package Installs        | Use for                                       |
@@ -18,13 +18,25 @@
 
 
 <br/>
-controller ==> end point logic...
+
+# File / Folder short info...
+|No| File / Folder | Usage of...                                           |
+|--|---------------|-------------------------------------------------------|
+|1 | index         | all basic configurations                              |
+|2 | routes        | user requesting url path for api calling...           |
+|3 | controller    | url end point, logical function run upon database...  |
+|4 | models        | database schema for formatted way store data into database...|
+|5 | connections   | mongodb database connections...                       |
+|6 | middleware    | 'verifyToken' function call, that user is authenticated for protected api call...|
+
 
 <br/>
 
 ```
-MONGODB_URI = mongodb+srv://USER_NAME:USER_PASS@cluster0.z9kin.mongodb.net/YOUR_DB_NAME?retryWrites=true&w=majority
+MONGODB_URI = mongodb+srv://USER_NAME:USER_PASS@cluster0.z9kin.mongodb.net/DB_NAME?retryWrites=true&w=majority
+
 JWT_SECRET = 'useItForTokenCreation'
+
 PORT = 3001
 ```
 
