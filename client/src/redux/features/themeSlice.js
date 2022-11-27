@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // global state
 const initialState = {
-    mode: "light"
+    mode: "dark"
 };
 
 export const themeSlice = createSlice({
-    name: "auth",
+    name: "theme",
 
     initialState,
 

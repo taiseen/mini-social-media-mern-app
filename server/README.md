@@ -42,6 +42,11 @@ PORT = 3001
 
 <br/>
 
+## NodeJs server side basic data flow
+<img src="./public/nodeJsDataFlow.png" />
+
+<br/>
+
 ## Data Table Relationships
 <img src="./public/dataTableRelation.png" />
 

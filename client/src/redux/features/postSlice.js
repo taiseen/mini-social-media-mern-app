@@ -20,11 +20,10 @@ export const postSlice = createSlice({
         setPost: (state, { payload }) => {
 
             const updatedPosts = state.posts.map(post => {
-                if (post._id === payload.post._id) {
-                    return payload.post;
-                } else {
-                    return post;
-                }
+
+                if (post._id === payload.post._id) return payload.post;
+
+                return post;
             });
 
             state.posts = updatedPosts;
