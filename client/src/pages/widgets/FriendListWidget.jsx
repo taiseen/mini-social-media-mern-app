@@ -1,14 +1,15 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import Friend from "components/Friend";
-import WidgetWrapper from "components/WidgetWrapper";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "redux/features/authSlice";
+import { useEffect } from "react";
+import WidgetWrapper from "components/WidgetWrapper";
+import Friend from "components/Friend";
 
 
 const FriendListWidget = ({ userId }) => {
-    const dispatch = useDispatch();
+
     const { palette } = useTheme();
+    const dispatch = useDispatch();
     const token = useSelector(state => state.auth.token);
     const friends = useSelector(state => state.user.friends);
 

@@ -1,20 +1,13 @@
-import { useState } from "react";
-import {
-    Box,
-    Button,
-    TextField,
-    useMediaQuery,
-    Typography,
-    useTheme,
-} from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { Formik } from "formik";
-import * as yup from "yup";
+import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from "@mui/material";
+import { setLogin } from "redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Dropzone from "react-dropzone";
+import { useState } from "react";
+import { Formik } from "formik";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import FlexBetween from "components/FlexBetween";
-import { setLogin } from "redux/features/authSlice";
+import Dropzone from "react-dropzone";
+import * as yup from "yup";
 
 const registerSchema = yup.object().shape({
     firstName: yup.string().required("required"),
@@ -47,11 +40,14 @@ const initialValuesLogin = {
 };
 
 const Form = () => {
-    const [pageType, setPageType] = useState("login");
-    const { palette } = useTheme();
+    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { palette } = useTheme();
+
     const isNonMobile = useMediaQuery("(min-width:600px)");
+    const [pageType, setPageType] = useState("login");
+    
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 

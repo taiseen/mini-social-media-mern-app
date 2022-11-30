@@ -1,13 +1,14 @@
+import FriendListWidget from "pages/widgets/FriendListWidget";
+import MyPostWidget from "pages/widgets/MyPostWidget";
+import AdvertWidget from "pages/widgets/AdvertWidget";
+import PostsWidget from "pages/widgets/PostsWidget";
+import UserWidget from "pages/widgets/UserWidget";
+import Navbar from "pages/navbar";
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
-import Navbar from "pages/navbar";
-import UserWidget from "pages/widgets/UserWidget";
-import MyPostWidget from "pages/widgets/MyPostWidget";
-import PostsWidget from "pages/widgets/PostsWidget";
-import AdvertWidget from "pages/widgets/AdvertWidget";
-import FriendListWidget from "pages/widgets/FriendListWidget";
 
 const HomePage = () => {
+
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
     const { _id, picturePath } = useSelector(state => state.auth.user);
 

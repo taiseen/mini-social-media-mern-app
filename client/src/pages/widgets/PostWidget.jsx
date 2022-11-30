@@ -23,14 +23,17 @@ const PostWidget = ({
     likes,
     comments,
 }) => {
-    const [isComments, setIsComments] = useState(false);
+
+    const { palette } = useTheme();
     const dispatch = useDispatch();
     const token = useSelector(state => state.auth.token);
     const loggedInUserId = useSelector(state => state.auth.user._id);
+
+    const [isComments, setIsComments] = useState(false);
+    
     const isLiked = Boolean(likes[loggedInUserId]);
     const likeCount = Object.keys(likes).length;
 
-    const { palette } = useTheme();
     const main = palette.neutral.main;
     const primary = palette.primary.main;
 

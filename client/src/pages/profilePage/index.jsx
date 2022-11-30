@@ -1,16 +1,18 @@
 import { Box, useMediaQuery } from "@mui/material";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import Navbar from "pages/navbar";
 import FriendListWidget from "pages/widgets/FriendListWidget";
 import MyPostWidget from "pages/widgets/MyPostWidget";
 import PostsWidget from "pages/widgets/PostsWidget";
 import UserWidget from "pages/widgets/UserWidget";
+import Navbar from "pages/navbar";
 
 const ProfilePage = () => {
-    const [user, setUser] = useState(null);
+ 
     const { userId } = useParams();
+    const [user, setUser] = useState(null);
+ 
     const token = useSelector(state => state.auth.token);
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 

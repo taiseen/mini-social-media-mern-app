@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "redux/features/postSlice";
-
+import { useEffect } from "react";
 import PostWidget from "./PostWidget";
 
 const PostsWidget = ({ userId, isProfile = false }) => {
+
     const dispatch = useDispatch();
     const posts = useSelector(state => state.post.posts);
     const token = useSelector(state => state.auth.token);

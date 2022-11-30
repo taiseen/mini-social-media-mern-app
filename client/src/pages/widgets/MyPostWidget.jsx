@@ -1,42 +1,28 @@
-import {
-    EditOutlined,
-    DeleteOutlined,
-    AttachFileOutlined,
-    GifBoxOutlined,
-    ImageOutlined,
-    MicOutlined,
-    MoreHorizOutlined,
-} from "@mui/icons-material";
-import {
-    Box,
-    Divider,
-    Typography,
-    InputBase,
-    useTheme,
-    Button,
-    IconButton,
-    useMediaQuery,
-} from "@mui/material";
-import FlexBetween from "components/FlexBetween";
-import Dropzone from "react-dropzone";
-import UserImage from "components/UserImage";
-import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
+import { EditOutlined, DeleteOutlined, AttachFileOutlined, GifBoxOutlined, ImageOutlined, MicOutlined, MoreHorizOutlined } from "@mui/icons-material";
+import { Box, Divider, Typography, InputBase, useTheme, Button, IconButton, useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "redux/features/postSlice";
+import { useState } from "react";
+import WidgetWrapper from "components/WidgetWrapper";
+import FlexBetween from "components/FlexBetween";
+import UserImage from "components/UserImage";
+import Dropzone from "react-dropzone";
 
 
 const MyPostWidget = ({ picturePath }) => {
-    const dispatch = useDispatch();
-    const [isImage, setIsImage] = useState(false);
-    const [image, setImage] = useState(null);
-    const [post, setPost] = useState("");
+
     const { palette } = useTheme();
+    const dispatch = useDispatch();
     const { _id } = useSelector(state => state.auth.user);
     const token = useSelector(state => state.auth.token);
+
+    const [post, setPost] = useState("");
+    const [image, setImage] = useState(null);
+    const [isImage, setIsImage] = useState(false);
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-    const mediumMain = palette.neutral.mediumMain;
+
     const medium = palette.neutral.medium;
+    const mediumMain = palette.neutral.mediumMain;
 
     const handlePost = async () => {
         const formData = new FormData();
