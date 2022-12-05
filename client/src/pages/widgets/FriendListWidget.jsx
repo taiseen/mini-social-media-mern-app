@@ -11,7 +11,7 @@ const FriendListWidget = ({ userId }) => {
     const { palette } = useTheme();
     const dispatch = useDispatch();
     const token = useSelector(state => state.auth.token);
-    const friends = useSelector(state => state.user.friends);
+    const friends = useSelector(state => state.user?.friends);
 
     const getFriends = async () => {
         const response = await fetch(
@@ -40,7 +40,7 @@ const FriendListWidget = ({ userId }) => {
                 Friend List
             </Typography>
             <Box display="flex" flexDirection="column" gap="1.5rem">
-                {friends.map((friend) => (
+                {friends?.map((friend) => (
                     <Friend
                         key={friend._id}
                         friendId={friend._id}

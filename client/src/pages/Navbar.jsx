@@ -1,5 +1,5 @@
 import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from "@mui/material";
-import { Search, Message, DarkMode, LightMode, Notifications, Help, Menu, Close } from "@mui/icons-material";
+import { Search, Message, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "redux/features/authSlice";
 import { setMode } from "redux/features/themeSlice";
@@ -15,8 +15,6 @@ const Navbar = () => {
     const navigate = useNavigate();
     const user = useSelector(state => state.auth.user);
 
-    console.log(user)
-
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
 
@@ -26,7 +24,7 @@ const Navbar = () => {
     const primaryLight = theme.palette.primary.light;
     const background = theme.palette.background.default;
 
-    const fullName = `${user.firstName} ${user.lastName}`;
+    const fullName = `${user?.firstName} ${user?.lastName}`;
 
 
     return (
@@ -66,7 +64,7 @@ const Navbar = () => {
 
             {/* DESKTOP NAV */}
             {isNonMobileScreens ? (
-                <FlexBetween gap="2rem">
+                <FlexBetween gap="1.5rem">
                     <IconButton onClick={() => dispatch(setMode())}>
                         {theme.palette.mode === "dark" ? (
                             <DarkMode sx={{ fontSize: "25px" }} />
@@ -74,9 +72,9 @@ const Navbar = () => {
                             <LightMode sx={{ color: dark, fontSize: "25px" }} />
                         )}
                     </IconButton>
-                    <Message sx={{ fontSize: "25px" }} />
-                    <Notifications sx={{ fontSize: "25px" }} />
-                    <Help sx={{ fontSize: "25px" }} />
+                    <IconButton><Message sx={{ fontSize: "25px" }} /></IconButton>
+                    <IconButton><Notifications sx={{ fontSize: "25px" }} /></IconButton>
+                    {/* <Help sx={{ fontSize: "25px" }} /> */}
                     <FormControl variant="standard" value={fullName}>
                         <Select
                             value={fullName}
@@ -103,9 +101,7 @@ const Navbar = () => {
                     </FormControl>
                 </FlexBetween>
             ) : (
-                <IconButton
-                    onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
-                >
+                <IconButton onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}>
                     <Menu />
                 </IconButton>
             )}
@@ -151,10 +147,11 @@ const Navbar = () => {
                         </IconButton>
                         <Message sx={{ fontSize: "25px" }} />
                         <Notifications sx={{ fontSize: "25px" }} />
-                        <Help sx={{ fontSize: "25px" }} />
+                        {/* <Help sx={{ fontSize: "25px" }} /> */}
                         <FormControl variant="standard" value={fullName}>
                             <Select
                                 value={fullName}
+                                input={<InputBase />}
                                 sx={{
                                     backgroundColor: neutralLight,
                                     width: "150px",
@@ -168,7 +165,6 @@ const Navbar = () => {
                                         backgroundColor: neutralLight,
                                     },
                                 }}
-                                input={<InputBase />}
                             >
                                 <MenuItem value={fullName}>
                                     <Typography>{fullName}</Typography>

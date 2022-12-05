@@ -1,4 +1,5 @@
 import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from "@mui/material";
+import { userLogin, userRegistration } from '../../hook';
 import { setLogin } from "redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -40,14 +41,18 @@ const initialValuesLogin = {
 };
 
 const Form = () => {
-    
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { palette } = useTheme();
 
-    const isNonMobile = useMediaQuery("(min-width:600px)");
+    const [statusInfo, setStatusInfo] = useState({
+        loginError: '',
+        registerSuccessInfo: '',
+        registerErrorInfo: '',
+    });
     const [pageType, setPageType] = useState("login");
-    
+    const isNonMobile = useMediaQuery("(min-width:600px)");
     const isLogin = pageType === "login";
     const isRegister = pageType === "register";
 
@@ -59,37 +64,41 @@ const Form = () => {
         }
         formData.append("picturePath", values.picture.name);
 
-        const savedUserResponse = await fetch(
-            "http://localhost:3001/auth/register",
-            {
-                method: "POST",
-                body: formData,
-            }
-        );
-        const savedUser = await savedUserResponse.json();
-        onSubmitProps.resetForm();
+        try {
+            const savedUserResponse = await userRegistration(formData);
+            onSubmitProps.resetForm();
 
-        if (savedUser) {
-            setPageType("login");
+            if (savedUserResponse.statusText === 'Created') {
+                setStatusInfo(pre => ({ ...pre, registerSuccessInfo: 'Account created successfully...' }));
+                setTimeout(() => {
+                    setPageType("login");
+                }, 2000);
+            }
+        } catch (error) {
+            console.log(error);
+            setStatusInfo(pre => ({ ...pre, registerErrorInfo: error.response?.statusText }));
         }
     };
 
     const login = async (values, onSubmitProps) => {
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
-        });
-        const loggedIn = await loggedInResponse.json();
-        onSubmitProps.resetForm();
-        if (loggedIn) {
+
+        try {
+            const { data } = await userLogin(values);
+            // console.log(data)
+            onSubmitProps.resetForm();
+
             dispatch(
                 setLogin({
-                    user: loggedIn.user,
-                    token: loggedIn.token,
+                    user: data.user,
+                    token: data.token,
                 })
             );
+
             navigate("/home");
+
+        } catch (error) {
+            console.log(error);
+            setStatusInfo(pre => ({ ...pre, loginError: error?.response?.data?.msg }));
         }
     };
 
@@ -249,6 +258,7 @@ const Form = () => {
                         <Typography
                             onClick={() => {
                                 setPageType(isLogin ? "register" : "login");
+                                setStatusInfo({}); // empty all status info...
                                 resetForm();
                             }}
                             sx={{
@@ -267,6 +277,38 @@ const Form = () => {
                                 : "Already have an account? Login here."}
                         </Typography>
                     </Box>
+
+                    {
+                        // login error message display
+                        isLogin && statusInfo?.loginError &&
+                        <Box>
+                            <Typography
+                                marginTop={2}
+                                sx={{
+                                    color: "tomato",
+                                    textAlign: "center",
+                                }}
+                            >
+                                {statusInfo?.loginError}
+                            </Typography>
+                        </Box>
+                    }
+
+                    {
+                        // register error message display
+                        isRegister && statusInfo?.registerErrorInfo &&
+                        <Box>
+                            <Typography
+                                marginTop={2}
+                                sx={{
+                                    color: "tomato",
+                                    textAlign: "center",
+                                }}
+                            >
+                                {statusInfo?.registerErrorInfo}
+                            </Typography>
+                        </Box>
+                    }
                 </form>
             )}
         </Formik>

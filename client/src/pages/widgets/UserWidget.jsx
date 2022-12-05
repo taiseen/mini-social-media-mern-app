@@ -1,38 +1,23 @@
 import { ManageAccountsOutlined, EditOutlined, LocationOnOutlined, WorkOutlineOutlined } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useGetUser } from 'hook';
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 
-const UserWidget = ({ userId, picturePath }) => {
+const UserWidget = ({ userId }) => {
 
-    const { palette } = useTheme();
     const navigate = useNavigate();
-    const token = useSelector(state => state.auth.token);
 
-    const [user, setUser] = useState(null);
+    const { data } = useGetUser(userId);
+    const { palette } = useTheme();
 
     const dark = palette.neutral.dark;
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
-    const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await response.json();
-        setUser(data);
-    };
-
-    useEffect(() => {
-        getUser();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-    if (!user) {
+    if (!data) {
         return null;
     }
 
@@ -44,7 +29,8 @@ const UserWidget = ({ userId, picturePath }) => {
         viewedProfile,
         impressions,
         friends,
-    } = user;
+        picturePath,
+    } = data;
 
     return (
         <WidgetWrapper>

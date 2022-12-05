@@ -32,10 +32,12 @@
 
 <br/>
 
-```
-MONGODB_URI = mongodb+srv://USER_NAME:USER_PASS@cluster0.z9kin.mongodb.net/DB_NAME?retryWrites=true&w=majority
+**.env**
 
-JWT_SECRET = 'useItForTokenCreation'
+```js
+MONGODB_URI = mongodb+srv://dbUser:dbPass@cluster0.z9kin.mongodb.net/DB_NAME?retryWrites=true&w=majority
+
+JWT_SECRET = useItForTokenCreation
 
 PORT = 3001
 ```

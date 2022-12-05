@@ -4,28 +4,26 @@ import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./styles/theme";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import ProfilePage from "pages/profilePage";
+import ProfilePage from "pages/ProfilePage";
 import LoginPage from "pages/loginPage";
-import HomePage from "pages/homePage";
+import HomePage from "pages/HomePage";
 
 
 function App() {
 
+  // this "mode" data come from redux global state...
   const mode = useSelector(state => state.theme.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(useSelector(state => state.auth.token));
-  // const posts = useSelector(state => state.post.posts);
-  // const user = useSelector(state => state.auth.user);
-  // console.log('mode ==> ' , mode)
-  // console.log('posts ==> ' , posts)
-  // console.log('user ==> ' , user)
-  // console.log('isAuth ==> ' , isAuth)
+
 
   return (
     <div className="app">
       <BrowserRouter>
+      
         <ThemeProvider theme={theme}>
           <CssBaseline />
+
           <Routes>
 
             <Route path="/" element={<LoginPage />} />
@@ -42,6 +40,7 @@ function App() {
 
           </Routes>
         </ThemeProvider>
+
       </BrowserRouter>
     </div>
   );

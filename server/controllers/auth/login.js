@@ -27,11 +27,11 @@ const login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
         // delete user password from object... | do not send it at frontend...
-        // delete user.password;
-        const { password, ...userInfo } = user;
+        // const { password, ...userInfo } = user;
+        delete user.password;
 
         // send token + user info at frontend...
-        res.status(200).json({ token, userInfo });
+        res.status(200).json({ token, user });
 
     } catch (err) {
         res.status(500).json({ error: err.message });

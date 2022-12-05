@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
+import store from "../redux";
 import axios from 'axios';
 
-
 // Backend || Server ==> URL Address
-const api = axios.create({ baseURL: 'http://localhost:3001/' });
-
+const api = axios.create({ baseURL: process.env.REACT_APP_SERVER_URL });
 
 // with every url request send user identification at server side for authentication...
 // send user auth automatically every time with every request...
 api.interceptors.request.use(req => {
 
-    // 1st ==> get user token from LocalStorage, that server send to client...
-    const token = JSON.parse(localStorage.getItem('jwt'))
+    // 1st ==> get user token from Redux store, that server send to client...
+    const token = store.getState().auth.token;
 
     // 2nd ==> send this token from LocalStorage into server for user id tracking...
     // & we can see it by at browser Network Console
@@ -31,6 +30,7 @@ const useFetch = (endPoint) => {
 
     useEffect(() => {
 
+        // 🟨🟨🟨 function definition...
         const fetchData = async () => {
 
             setLoading(true);
@@ -43,7 +43,7 @@ const useFetch = (endPoint) => {
             setLoading(false);
         }
 
-        // function calling...
+        // 🟩🟩🟩 function calling...
         fetchData();
 
     }, [endPoint]);
@@ -52,10 +52,26 @@ const useFetch = (endPoint) => {
 }
 
 
+// 🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 REST api call 🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨
 
-export const useGetUser = (data) => useFetch(data);
 
-// POST Requests
+// GET Requests...
+// 🟩🟩🟩🟩🟩🟩
+export const useGetUser = userID => useFetch('/users/' + userID);
+
+
+// GET      /:id/friends
+// PATCH    /:id/:friendId
+
+// posts
+// GET      /
+// GET      /:userId/posts
+// POST     /
+// POST     /:id/like
+
+// POST Requests...
 // 🟨🟨🟨🟨🟨🟨
 export const userLogin = loginInfo => api.post('/auth/login', loginInfo);
 export const userRegistration = newUserInfo => api.post('/auth/registration', newUserInfo);
