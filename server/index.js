@@ -1,4 +1,4 @@
-// import { users, posts } from "./data/index.js";
+import { users, posts } from "./data/index.js";
 import { fileURLToPath } from "url";
 import registration from "./controllers/auth/registration.js";
 import welcomeMessage from "./controllers/welcomeMessage.js";
@@ -16,6 +16,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
+import User from "./models/User.js";
+import Post from "./models/Post.js";
 
 
 // * Configurations
@@ -62,8 +64,8 @@ app.listen(PORT, () => {
     mongoDB();
 
     // ADD DATA ONE TIME
-    // User.insertMany(users);
-    // Post.insertMany(posts);
+    User.insertMany(users);
+    Post.insertMany(posts);
 });
 
 

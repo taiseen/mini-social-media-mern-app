@@ -104,7 +104,10 @@ const UserWidget = ({ userId }) => {
 
                 <FlexBetween gap="1rem" mb="0.5rem">
                     <FlexBetween gap="1rem">
-                        <img src="../assets/twitter.png" alt="twitter" />
+                        <img
+                            alt="twitter"
+                            src={`${process.env.REACT_APP_SERVER_URL}/assets/twitter.png`}
+                        />
                         <Box>
                             <Typography color={main} fontWeight="500">
                                 Twitter
@@ -117,7 +120,10 @@ const UserWidget = ({ userId }) => {
 
                 <FlexBetween gap="1rem">
                     <FlexBetween gap="1rem">
-                        <img src="../assets/linkedin.png" alt="linkedin" />
+                        <img
+                            alt="linkedin"
+                            src={`${process.env.REACT_APP_SERVER_URL}/assets/linkedin.png`}
+                        />
                         <Box>
                             <Typography color={main} fontWeight="500">
                                 Linkedin

@@ -27,7 +27,6 @@ const useFetch = (endPoint) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false);
 
-
     useEffect(() => {
 
         // 🟨🟨🟨 function definition...
@@ -59,17 +58,24 @@ const useFetch = (endPoint) => {
 
 // GET Requests...
 // 🟩🟩🟩🟩🟩🟩
-export const useGetUser = userID => useFetch('/users/' + userID);
+export const useGetUser = userId => useFetch('/users/' + userId);
+export const useGetFriends = userId => useFetch(`/users/${userId}/friends`);
+
+export const useGetPost = _ => useFetch('/posts');
+export const useGetPosts = userId => useFetch(`/posts/${userId}/posts`);
 
 
-// GET      /:id/friends
+
+
+
 // PATCH    /:id/:friendId
 
-// posts
-// GET      /
-// GET      /:userId/posts
 // POST     /
 // POST     /:id/like
+
+
+
+
 
 // POST Requests...
 // 🟨🟨🟨🟨🟨🟨

@@ -8,3 +8,5 @@ server/.env
 
 build
 client/build
+
+server/public/assets

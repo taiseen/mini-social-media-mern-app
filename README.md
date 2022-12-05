@@ -10,6 +10,7 @@
 5. React Dropzone
 6. Formik
 7. Yup
+8. Axios
 
 ## Backend | lib used...
 01. Express

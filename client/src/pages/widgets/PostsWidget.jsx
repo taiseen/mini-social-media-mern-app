@@ -1,46 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useGetPost, useGetPosts } from '../../hook';
 import { setPosts } from "redux/features/postSlice";
 import { useEffect } from "react";
 import PostWidget from "./PostWidget";
 
+
 const PostsWidget = ({ userId, isProfile = false }) => {
 
     const dispatch = useDispatch();
+
+    const { data: allPost } = useGetPost();
+    const { data: userFriendsPosts } = useGetPosts(userId);
+
     const posts = useSelector(state => state.post.posts);
-    const token = useSelector(state => state.auth.token);
-
-    const getPosts = async () => {
-        const response = await fetch("http://localhost:3001/posts", {
-            method: "GET",
-            headers: { Authorization: `Bearer ${token}` },
-        });
-        const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-    };
-
-    const getUserPosts = async () => {
-        const response = await fetch(
-            `http://localhost:3001/posts/${userId}/posts`,
-            {
-                method: "GET",
-                headers: { Authorization: `Bearer ${token}` },
-            }
-        );
-        const data = await response.json();
-        dispatch(setPosts({ posts: data }));
-    };
 
     useEffect(() => {
-        if (isProfile) {
-            getUserPosts();
-        } else {
-            getPosts();
-        }
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+        isProfile
+            ? dispatch(setPosts({ posts: userFriendsPosts }))
+            : dispatch(setPosts({ posts: allPost }))
+    }, [allPost, userFriendsPosts, dispatch, isProfile]);
 
     return (
         <>
-            {posts.map(
+            {posts?.map(
                 ({
                     _id,
                     userId,
