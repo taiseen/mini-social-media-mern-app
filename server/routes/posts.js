@@ -1,3 +1,4 @@
+import deleteUserPost from './../controllers/posts/deleteUserPost.js';
 import getFeedPosts from "../controllers/posts/getFeedPosts.js";
 import getUserPosts from "../controllers/posts/getUserPosts.js";
 import createPost from "../controllers/posts/createPost.js";
@@ -22,6 +23,9 @@ router.get("/:userId/posts", verifyToken, getUserPosts);
 
 // 🟨🟨🟨 Update Operation 
 router.patch("/:id/like", verifyToken, likePost);
+
+// 🟥🟥🟥 Delete Operation
+router.delete("/:postId", verifyToken, deleteUserPost);
 
 
 export default router;

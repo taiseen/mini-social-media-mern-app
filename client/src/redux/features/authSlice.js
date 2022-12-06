@@ -25,10 +25,10 @@ const authSlice = createSlice({
 
         setFriends: (state, { payload }) => {
             state.user
-                ? state.user.friends = payload.friends
+                ? state.user.friends = payload?.friends
                 : console.error("user friends non-existent :(");
-
         }
+
     },
 });
 

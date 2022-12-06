@@ -11,35 +11,41 @@ const FriendListWidget = ({ userId }) => {
 
     const dispatch = useDispatch();
     const { palette } = useTheme();
-    const { data } = useGetFriends(userId);
-    const friends = useSelector(state => state.user?.friends);
+    const { data } = useGetFriends(userId); // * backend api call for GET request...
+    const friends = useSelector(state => state.auth.user.friends);
 
     useEffect(() => {
+        // data store in redux store for globally accessible...
         dispatch(setFriends({ friends: data }));
     }, [data, dispatch]);
 
-    
+
     return (
         <WidgetWrapper>
+
             <Typography
-                color={palette.neutral.dark}
                 variant="h5"
                 fontWeight="500"
                 sx={{ mb: "1.5rem" }}
+                color={palette.neutral.dark}
             >
                 Friend List
             </Typography>
+
             <Box display="flex" flexDirection="column" gap="1.5rem">
-                {friends?.map((friend) => (
-                    <Friend
-                        key={friend._id}
-                        friendId={friend._id}
-                        name={`${friend.firstName} ${friend.lastName}`}
-                        subtitle={friend.occupation}
-                        userPicturePath={friend.picturePath}
-                    />
-                ))}
+                {
+                    friends?.map(friend => (
+                        <Friend
+                            key={friend._id}
+                            friendId={friend._id}
+                            subtitle={friend.occupation}
+                            userPicturePath={friend.picturePath}
+                            name={`${friend.firstName} ${friend.lastName}`}
+                        />
+                    ))
+                }
             </Box>
+
         </WidgetWrapper>
     );
 };

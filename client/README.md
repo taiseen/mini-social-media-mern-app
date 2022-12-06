@@ -15,9 +15,11 @@
 |8 | yarn add `dotenv`          | Loads environment variables from .env file    |
 |9 | yarn add `react-dropzone`  | Simple HTML5 drag-drop zone with React.js     |
 |10| yarn add `react-router-dom`| Declarative routing for React web app         |
-|11| yarn add `formik`          | Build forms in React, without the tears       |
-|12| yarn add `yup`             | Simple Object schema validation               |
-|13| yarn add `axios`           | Promise based HTTP req & res                  |
+|11| yarn add `react-toastify`  | add notifications                             |
+|12| yarn add `formik`          | Build forms in React, without the tears       |
+|13| yarn add `yup`             | Simple Object schema validation               |
+|14| yarn add `axios`           | Promise based HTTP req & res                  |
+
 
 <br />
 

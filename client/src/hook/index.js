@@ -61,16 +61,13 @@ const useFetch = (endPoint) => {
 export const useGetUser = userId => useFetch('/users/' + userId);
 export const useGetFriends = userId => useFetch(`/users/${userId}/friends`);
 
-export const useGetPost = _ => useFetch('/posts');
-export const useGetPosts = userId => useFetch(`/posts/${userId}/posts`);
+export const useGetAllPost = _ => useFetch('/posts');
+export const useGetUserPosts = userId => useFetch(`/posts/${userId}/posts`);
 
 
 
 
 
-// PATCH    /:id/:friendId
-
-// POST     /
 // POST     /:id/like
 
 
@@ -81,3 +78,15 @@ export const useGetPosts = userId => useFetch(`/posts/${userId}/posts`);
 // 🟨🟨🟨🟨🟨🟨
 export const userLogin = loginInfo => api.post('/auth/login', loginInfo);
 export const userRegistration = newUserInfo => api.post('/auth/registration', newUserInfo);
+
+export const userPostCreation = postData => api.post('/posts', postData);
+
+// PATCH Requests...
+// 🟨🟨🟨🟨🟨🟨
+export const postLike = (userId, friendId) => api.patch(`users/${userId}/${friendId}`);
+export const addRemoveFriend = (userId, friendId) => api.patch(`users/${userId}/${friendId}`);
+
+// PATCH Requests...
+// 🟥🟥🟥🟥🟥🟥
+export const userPostDelete = postId => api.delete(`posts/${postId}`);
+

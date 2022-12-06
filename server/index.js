@@ -1,11 +1,5 @@
-import { users, posts } from "./data/index.js";
-import { fileURLToPath } from "url";
-import registration from "./controllers/auth/registration.js";
 import welcomeMessage from "./controllers/welcomeMessage.js";
-import createPost from "./controllers/posts/createPost.js";
-import verifyToken from "./middleware/verifyToken.js";
 import mongoDB from "./connection/mongoDB.js";
-import upload from "./storage/fileStorage.js";
 import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import authRoutes from "./routes/auth.js";
@@ -16,8 +10,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import path from "path";
-import User from "./models/User.js";
-import Post from "./models/Post.js";
+import { fileURLToPath } from "url";
+
 
 
 // * Configurations
@@ -48,7 +42,7 @@ app.use(express.static('public'));
 
 
 
-// * Routs
+// * 🔀🔀🔀 Routs
 // 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
@@ -56,20 +50,20 @@ app.use("/posts", postRoutes);
 
 
 
-// * DB Connection... 
+// * 📝📝📝 DB Connection... 
 // 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log('Server Start on port :', PORT, '🟩');
     mongoDB();
 
-    // ADD DATA ONE TIME
-    User.insertMany(users);
-    Post.insertMany(posts);
+    // * ADD DATA ONE TIME | if not then its generate ERROR
+    // User.insertMany(users);
+    // Post.insertMany(posts);
 });
 
 
 
-// * Root Welcome Message... 
+// * 🤗🤗🤗 Root Welcome Message... 
 // 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 app.get('/', welcomeMessage);

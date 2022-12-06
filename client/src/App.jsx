@@ -1,12 +1,14 @@
 import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
+import { ToastContainer } from 'react-toastify';
 import { themeSettings } from "./styles/theme";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import ProfilePage from "pages/ProfilePage";
 import LoginPage from "pages/loginPage";
 import HomePage from "pages/HomePage";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-      
+
         <ThemeProvider theme={theme}>
           <CssBaseline />
 
@@ -41,6 +43,7 @@ function App() {
           </Routes>
         </ThemeProvider>
 
+        <ToastContainer theme="dark" style={{ fontSize: "18px" }} />
       </BrowserRouter>
     </div>
   );

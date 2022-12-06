@@ -1,3 +1,4 @@
+import { loginInitValues, registerInitValues, loginSchema, registerSchema } from "./value&validation";
 import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from "@mui/material";
 import { userLogin, userRegistration } from '../../hook';
 import { setLogin } from "redux/features/authSlice";
@@ -8,55 +9,29 @@ import { Formik } from "formik";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
-import * as yup from "yup";
 
-const registerSchema = yup.object().shape({
-    firstName: yup.string().required("required"),
-    lastName: yup.string().required("required"),
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
-    location: yup.string().required("required"),
-    occupation: yup.string().required("required"),
-    picture: yup.string().required("required"),
-});
-
-const loginSchema = yup.object().shape({
-    email: yup.string().email("invalid email").required("required"),
-    password: yup.string().required("required"),
-});
-
-const initialValuesRegister = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    location: "",
-    occupation: "",
-    picture: "",
-};
-
-const initialValuesLogin = {
-    email: "",
-    password: "",
-};
 
 const Form = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { palette } = useTheme();
+    const isNonMobile = useMediaQuery("(min-width:600px)");
+
+    const [pageType, setPageType] = useState("login");
+    const isRegister = pageType === "register";
+    const isLogin = pageType === "login";
 
     const [statusInfo, setStatusInfo] = useState({
         loginError: '',
         registerSuccessInfo: '',
         registerErrorInfo: '',
     });
-    const [pageType, setPageType] = useState("login");
-    const isNonMobile = useMediaQuery("(min-width:600px)");
-    const isLogin = pageType === "login";
-    const isRegister = pageType === "register";
 
+
+    // * backend api call for POST request...
     const register = async (values, onSubmitProps) => {
+
         // this allows us to send form info with image
         const formData = new FormData();
         for (let value in values) {
@@ -70,9 +45,7 @@ const Form = () => {
 
             if (savedUserResponse.statusText === 'Created') {
                 setStatusInfo(pre => ({ ...pre, registerSuccessInfo: 'Account created successfully...' }));
-                setTimeout(() => {
-                    setPageType("login");
-                }, 2000);
+                setTimeout(() => { setPageType("login") }, 2000);
             }
         } catch (error) {
             console.log(error);
@@ -80,13 +53,14 @@ const Form = () => {
         }
     };
 
+    // * backend api call for POST request...
     const login = async (values, onSubmitProps) => {
 
         try {
             const { data } = await userLogin(values);
-            // console.log(data)
             onSubmitProps.resetForm();
 
+            // set user info at redux global store...
             dispatch(
                 setLogin({
                     user: data.user,
@@ -110,7 +84,7 @@ const Form = () => {
     return (
         <Formik
             onSubmit={handleFormSubmit}
-            initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
+            initialValues={isLogin ? loginInitValues : registerInitValues}
             validationSchema={isLogin ? loginSchema : registerSchema}
         >
             {({
@@ -120,117 +94,115 @@ const Form = () => {
                 handleBlur,
                 handleChange,
                 handleSubmit,
-                setFieldValue,
+                setFieldValue, // use for specific file upload...
                 resetForm,
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
                         display="grid"
-                        gap="30px"
                         gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                        sx={{
-                            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                        }}
+                        gap="30px"
+                        sx={{ "& > div": { gridColumn: isNonMobile ? undefined : "span 4" } }}
                     >
-                        {isRegister && (
-                            <>
-                                <TextField
-                                    label="First Name"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.firstName}
-                                    name="firstName"
-                                    error={
-                                        Boolean(touched.firstName) && Boolean(errors.firstName)
-                                    }
-                                    helperText={touched.firstName && errors.firstName}
-                                    sx={{ gridColumn: "span 2" }}
-                                />
-                                <TextField
-                                    label="Last Name"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.lastName}
-                                    name="lastName"
-                                    error={Boolean(touched.lastName) && Boolean(errors.lastName)}
-                                    helperText={touched.lastName && errors.lastName}
-                                    sx={{ gridColumn: "span 2" }}
-                                />
-                                <TextField
-                                    label="Location"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.location}
-                                    name="location"
-                                    error={Boolean(touched.location) && Boolean(errors.location)}
-                                    helperText={touched.location && errors.location}
-                                    sx={{ gridColumn: "span 4" }}
-                                />
-                                <TextField
-                                    label="Occupation"
-                                    onBlur={handleBlur}
-                                    onChange={handleChange}
-                                    value={values.occupation}
-                                    name="occupation"
-                                    error={
-                                        Boolean(touched.occupation) && Boolean(errors.occupation)
-                                    }
-                                    helperText={touched.occupation && errors.occupation}
-                                    sx={{ gridColumn: "span 4" }}
-                                />
-                                <Box
-                                    gridColumn="span 4"
-                                    border={`1px solid ${palette.neutral.medium}`}
-                                    borderRadius="5px"
-                                    p="1rem"
-                                >
-                                    <Dropzone
-                                        acceptedFiles=".jpg,.jpeg,.png"
-                                        multiple={false}
-                                        onDrop={(acceptedFiles) =>
-                                            setFieldValue("picture", acceptedFiles[0])
-                                        }
+                        {
+                            // Registration Form...
+                            isRegister && (
+                                <>
+                                    <TextField
+                                        name="firstName"
+                                        label="First Name"
+                                        onBlur={handleBlur}         // click out into the input
+                                        onChange={handleChange}     // handle when user is typing...
+                                        value={values.firstName}
+                                        error={Boolean(touched.firstName) && Boolean(errors.firstName)} // display error info...
+                                        helperText={touched.firstName && errors.firstName}
+                                        sx={{ gridColumn: "span 2" }}
+                                    />
+                                    <TextField
+                                        name="lastName"
+                                        label="Last Name"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.lastName}
+                                        error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                                        helperText={touched.lastName && errors.lastName}
+                                        sx={{ gridColumn: "span 2" }}
+                                    />
+                                    <TextField
+                                        name="location"
+                                        label="Location"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.location}
+                                        error={Boolean(touched.location) && Boolean(errors.location)}
+                                        helperText={touched.location && errors.location}
+                                        sx={{ gridColumn: "span 4" }}
+                                    />
+                                    <TextField
+                                        name="occupation"
+                                        label="Occupation"
+                                        onBlur={handleBlur}
+                                        onChange={handleChange}
+                                        value={values.occupation}
+                                        error={Boolean(touched.occupation) && Boolean(errors.occupation)}
+                                        helperText={touched.occupation && errors.occupation}
+                                        sx={{ gridColumn: "span 4" }}
+                                    />
+                                    <Box
+                                        p="1rem"
+                                        borderRadius="5px"
+                                        gridColumn="span 4"
+                                        border={`1px solid ${palette.neutral.medium}`}
                                     >
-                                        {({ getRootProps, getInputProps }) => (
-                                            <Box
-                                                {...getRootProps()}
-                                                border={`2px dashed ${palette.primary.main}`}
-                                                p="1rem"
-                                                sx={{ "&:hover": { cursor: "pointer" } }}
-                                            >
-                                                <input {...getInputProps()} />
-                                                {!values.picture ? (
-                                                    <p>Add Picture Here</p>
-                                                ) : (
-                                                    <FlexBetween>
-                                                        <Typography>{values.picture.name}</Typography>
-                                                        <EditOutlinedIcon />
-                                                    </FlexBetween>
-                                                )}
-                                            </Box>
-                                        )}
-                                    </Dropzone>
-                                </Box>
-                            </>
-                        )}
+                                        <Dropzone
+                                            multiple={false}                // only single file allowed
+                                            acceptedFiles=".jpg,.jpeg,.png" // only accept these formate files
+                                            onDrop={acceptedFiles => setFieldValue("picture", acceptedFiles[0])}
+                                        >
+                                            {
+                                                ({ getRootProps, getInputProps }) => (
+                                                    <Box
+                                                        {...getRootProps()}
+                                                        p="1rem"
+                                                        border={`2px dashed ${palette.primary.main}`}
+                                                        sx={{ "&:hover": { cursor: "pointer" } }}
+                                                    >
+                                                        <input {...getInputProps()} />
+                                                        {
+                                                            !values.picture // if no picture is uploaded...
+                                                                ? <p>Add Picture Here</p>
+                                                                : <FlexBetween>
+                                                                    <Typography>{values.picture.name}</Typography>
+                                                                    <EditOutlinedIcon />
+                                                                </FlexBetween>
+                                                        }
+                                                    </Box>
+                                                )
+                                            }
+                                        </Dropzone>
+                                    </Box>
+                                </>
+                            )
+                        }
 
+                        {/* Registration & Login Form... */}
                         <TextField
+                            name="email"
                             label="Email"
                             onBlur={handleBlur}
                             onChange={handleChange}
                             value={values.email}
-                            name="email"
                             error={Boolean(touched.email) && Boolean(errors.email)}
                             helperText={touched.email && errors.email}
                             sx={{ gridColumn: "span 4" }}
                         />
                         <TextField
+                            name="password"
                             label="Password"
                             type="password"
                             onBlur={handleBlur}
                             onChange={handleChange}
                             value={values.password}
-                            name="password"
                             error={Boolean(touched.password) && Boolean(errors.password)}
                             helperText={touched.password && errors.password}
                             sx={{ gridColumn: "span 4" }}
@@ -243,16 +215,18 @@ const Form = () => {
                             fullWidth
                             type="submit"
                             sx={{
-                                m: "2rem 0",
                                 p: "1rem",
+                                m: "2rem 0",
                                 fontSize: "1rem",
                                 transition: ".5s",
-                                backgroundColor: palette.primary.main,
                                 color: palette.background.alt,
+                                backgroundColor: palette.primary.main,
                                 "&:hover": { color: palette.primary.main },
                             }}
                         >
-                            {isLogin ? "LOGIN" : "REGISTER"}
+                            {
+                                isLogin ? "LOGIN" : "REGISTER"
+                            }
                         </Button>
 
                         <Typography
@@ -262,24 +236,26 @@ const Form = () => {
                                 resetForm();
                             }}
                             sx={{
-                                textDecoration: "underline",
-                                color: palette.primary.main,
                                 textAlign: "center",
                                 transition: ".3s",
+                                textDecoration: "underline",
+                                color: palette.primary.main,
                                 "&:hover": {
                                     cursor: "pointer",
                                     color: palette.primary.dark,
-                                },
+                                }
                             }}
                         >
-                            {isLogin
-                                ? "Don't have an account? Sign Up here."
-                                : "Already have an account? Login here."}
+                            {
+                                isLogin
+                                    ? "Don't have an account? Sign Up here."
+                                    : "Already have an account? Login here."
+                            }
                         </Typography>
                     </Box>
 
                     {
-                        // login error message display
+                        // ! login error message display
                         isLogin && statusInfo?.loginError &&
                         <Box>
                             <Typography
@@ -295,7 +271,7 @@ const Form = () => {
                     }
 
                     {
-                        // register error message display
+                        // ! register error message display
                         isRegister && statusInfo?.registerErrorInfo &&
                         <Box>
                             <Typography

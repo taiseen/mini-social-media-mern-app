@@ -10,8 +10,8 @@ const UserWidget = ({ userId }) => {
 
     const navigate = useNavigate();
 
-    const { data } = useGetUser(userId);
     const { palette } = useTheme();
+    const { data } = useGetUser(userId); // * backend api call for GET request...
 
     const dark = palette.neutral.dark;
     const main = palette.neutral.main;
@@ -63,6 +63,7 @@ const UserWidget = ({ userId }) => {
             </FlexBetween>
 
             <Divider />
+            {/* ========================================================================== */}
 
             {/* SECOND ROW */}
             <Box p="1rem 0">
@@ -77,6 +78,7 @@ const UserWidget = ({ userId }) => {
             </Box>
 
             <Divider />
+            {/* ========================================================================== */}
 
             {/* THIRD ROW */}
             <Box p="1rem 0">
@@ -95,6 +97,7 @@ const UserWidget = ({ userId }) => {
             </Box>
 
             <Divider />
+            {/* ========================================================================== */}
 
             {/* FOURTH ROW */}
             <Box p="1rem 0">
