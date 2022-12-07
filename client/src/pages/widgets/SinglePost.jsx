@@ -1,16 +1,16 @@
 import { ChatBubbleOutlineOutlined, FavoriteBorderOutlined, FavoriteOutlined, ShareOutlined, DeleteOutlined } from "@mui/icons-material";
 import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "redux/features/postSlice";
-import { toast } from 'react-toastify';
-import { userPostDelete } from "hook";
+import { setPost } from "redux/features/postSlice";
 import { useState } from "react";
+import { postLike } from "hook";
 import WidgetWrapper from "components/WidgetWrapper";
+import DeletePostDialog from "./DeletePostDialog";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 
 
-const PostWidget = ({
+const SinglePost = ({
     name,
     likes,
     postId,
@@ -25,57 +25,28 @@ const PostWidget = ({
     const { palette } = useTheme();
     const dispatch = useDispatch();
 
-    const token = useSelector(state => state.auth.token);
     const loggedInUserId = useSelector(state => state.auth.user._id);
-    const posts = useSelector(state => state.post?.posts);
 
+    const [postDeleteModalOpen, setPostDeleteModalOpen] = useState(false);
 
     const [isComments, setIsComments] = useState(false);
 
     const isLiked = Boolean(likes[loggedInUserId]);
     const likeCount = Object.keys(likes).length;
-
     const main = palette.neutral.main;
-    // const primary = palette.primary.main;
 
-    try {
-        // postLike
-        // dispatch(setPosts({ post: updatedPost }));
-    } catch (error) {
-        console.log(error);
-    }
 
-    const patchLike = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-            method: "PATCH",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId: loggedInUserId }),
-        });
-        const updatedPost = await response.json();
-        dispatch(setPosts({ post: updatedPost }));
-    };
-
-    // 🟥🟥🟥 Delete request...
-    const handlePostDelete = async () => {
+    // 🟨🟨🟨 Update request...
+    const likeUserPost = async () => {
         try {
-            const { status, data } = await userPostDelete(postId);
-
-            if (status === 200) {
-                // update ui by removing this deleted post...
-                const updatedPost = posts.filter(post => post._id !== postId)
-                dispatch(setPosts({ posts: updatedPost }));
-            }
-            // display a notification...
-            toast.success(data.message + "❗", { autoClose: 2000 });
+            const { data } = await postLike(postId, loggedInUserId);
+            dispatch(setPost({ post: data }));
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
-    
+
     return (
         <WidgetWrapper m="2rem 0">
             <Friend
@@ -84,10 +55,14 @@ const PostWidget = ({
                 postUserId={postUserId}
                 userPicturePath={userPicturePath}
             />
+
+            {/* User writing post description */}
             <Typography color={main} sx={{ mt: "1rem" }}>
                 {description}
             </Typography>
+
             {
+                // if user upload any picture for post...
                 picturePath && (
                     <img
                         width="100%"
@@ -103,11 +78,11 @@ const PostWidget = ({
 
                     {/* 🧡🧡🧡 like button */}
                     <FlexBetween gap="0.3rem">
-                        <IconButton onClick={patchLike}>
+                        <IconButton onClick={likeUserPost}>
                             {
                                 isLiked
-                                    ? <FavoriteOutlined sx={{ color: 'orange' }} />
-                                    : <FavoriteBorderOutlined />
+                                    ? <FavoriteOutlined sx={{ color: 'red' }} />
+                                    : <FavoriteBorderOutlined sx={{ color: 'orange' }} />
                             }
                         </IconButton>
                         <Typography>{likeCount}</Typography>
@@ -116,7 +91,7 @@ const PostWidget = ({
                     {/* 📩📩📩 comment button */}
                     <FlexBetween gap="0.3rem">
                         <IconButton onClick={() => setIsComments(!isComments)}>
-                            <ChatBubbleOutlineOutlined />
+                            <ChatBubbleOutlineOutlined sx={{ color: 'lightblue' }} />
                         </IconButton>
                         <Typography>{comments.length}</Typography>
                     </FlexBetween>
@@ -125,7 +100,7 @@ const PostWidget = ({
                         // ⛔⛔⛔ delete button
                         loggedInUserId === postUserId &&
                         <FlexBetween gap="0.3rem">
-                            <IconButton onClick={handlePostDelete}
+                            <IconButton onClick={() => setPostDeleteModalOpen(true)}
                                 sx={{
                                     "&:hover": {
                                         color: 'red',
@@ -160,8 +135,18 @@ const PostWidget = ({
                     </Box>
                 )
             }
+
+            {
+                // post delete confirmation modal...
+                postDeleteModalOpen &&
+                <DeletePostDialog
+                    postId={postId}
+                    postDeleteModalOpen={postDeleteModalOpen}
+                    setPostDeleteModalOpen={setPostDeleteModalOpen}
+                />
+            }
         </WidgetWrapper>
     );
 };
 
-export default PostWidget;
+export default SinglePost;

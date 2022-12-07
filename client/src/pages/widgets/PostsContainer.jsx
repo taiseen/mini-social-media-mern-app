@@ -2,10 +2,10 @@ import { useGetAllPost, useGetUserPosts } from '../../hook';
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "redux/features/postSlice";
 import { useEffect } from "react";
-import PostWidget from "./PostWidget";
+import SinglePost from "./SinglePost";
 
 
-const PostsContainerWidget = ({ userId, isProfile = false }) => {
+const PostsContainer = ({ userId, isProfile = false }) => {
 
     const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ const PostsContainerWidget = ({ userId, isProfile = false }) => {
                             picturePath,
                             userPicturePath,
                         }) => (
-                            <PostWidget
+                            <SinglePost
                                 key={_id}
                                 postId={_id}
                                 likes={likes}
@@ -58,4 +58,4 @@ const PostsContainerWidget = ({ userId, isProfile = false }) => {
     );
 };
 
-export default PostsContainerWidget;
+export default PostsContainer;

@@ -1,4 +1,4 @@
-import { FriendListWidget, PostCreationWidget, PostsContainerWidget, UserWidget } from "./widgets";
+import { FriendList, NewPostCreate, PostsContainer, UserInfo } from "./widgets";
 import { Box, useMediaQuery } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useGetUser } from "hook";
@@ -9,6 +9,8 @@ const ProfilePage = () => {
 
     const { userId } = useParams();
     const { data, loading, error } = useGetUser(userId); // * backend api call for GET request...
+    console.log(data, loading);
+    console.log(userId);
 
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
@@ -26,17 +28,17 @@ const ProfilePage = () => {
                 justifyContent="center"
             >
                 <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-                    <UserWidget userId={userId} />
+                    <UserInfo userId={userId} picturePath={data?.picturePath} />
                     <Box m="2rem 0" />
-                    <FriendListWidget userId={userId} />
+                    <FriendList userId={userId} />
                 </Box>
                 <Box
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
-                    <PostCreationWidget picturePath={data.picturePath} />
+                    <NewPostCreate picturePath={data?.picturePath} />
                     <Box m="2rem 0" />
-                    <PostsContainerWidget userId={userId} isProfile />
+                    <PostsContainer userId={userId} isProfile />
                 </Box>
             </Box>
         </Box>

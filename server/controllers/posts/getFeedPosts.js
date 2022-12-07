@@ -4,10 +4,10 @@ import Post from "../../models/Post.js";
 const getFeedPosts = async (req, res) => {
 
     try {
-        const post = await Post.find();
+        const allPost = await Post.find();
 
         // successfully get request | 200
-        res.status(200).json(post);
+        res.status(200).json(allPost);
 
     } catch (err) {
         res.status(404).json({ message: err.message });

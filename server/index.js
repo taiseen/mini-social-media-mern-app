@@ -32,13 +32,6 @@ app.use("/assets", express.static(path.join(__dirName, "public/assets")));
 
 // * public file accessible...
 app.use(express.static('public'));
-// app.use('/fav.ico', express.static('public/fav.ico'));
-
-// * Routes With Files
-// * routs + middleware + endpoints logical function call
-// in the HTTP call this [[[picture]]] property is setting where image is allocated...
-// app.post("/auth/registration", upload.single("picture"), registration);
-// app.post("/posts", verifyToken, upload.single("picture"), createPost);
 
 
 

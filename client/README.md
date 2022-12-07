@@ -42,7 +42,6 @@
 REACT_APP_SERVER_URL = http://localhost:3001/
 ```
 
-<br />
 
 ## Leaning Context
 * REST API call from a single js file.

@@ -24,8 +24,7 @@ const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
 
     const isFriend = friends?.find(friend => friend?._id === postUserId);
 
-    console.log(isFriend)
-
+    // console.log(isFriend)
 
     // 🟨🟨🟨 Patch Request...
     const patchFriend = async () => {
@@ -44,7 +43,7 @@ const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
                 <Box
                     onClick={() => {
                         navigate(`/profile/${postUserId}`);
-                        navigate(0);
+                        navigate(0); // refresh again this url...
                     }}
                 >
                     <Typography

@@ -10,7 +10,7 @@ import Dropzone from "react-dropzone";
 import { userPostCreation } from '../../hook/index';
 
 
-const PostCreationWidget = ({ picturePath }) => {
+const NewPostCreate = ({ picturePath }) => {
 
     const { palette } = useTheme();
     const dispatch = useDispatch();
@@ -166,4 +166,4 @@ const PostCreationWidget = ({ picturePath }) => {
     );
 };
 
-export default PostCreationWidget;
+export default NewPostCreate;

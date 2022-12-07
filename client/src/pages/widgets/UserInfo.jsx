@@ -6,7 +6,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 
-const UserWidget = ({ userId }) => {
+const UserInfo = ({ userId, picturePath : userImg }) => {
 
     const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const UserWidget = ({ userId }) => {
                 onClick={() => navigate(`/profile/${userId}`)}
             >
                 <FlexBetween gap="1rem">
-                    <UserImage image={picturePath} />
+                    <UserImage image={picturePath || userImg} />
                     <Box>
                         <Typography
                             variant="h4"
@@ -56,7 +56,7 @@ const UserWidget = ({ userId }) => {
                         >
                             {firstName} {lastName}
                         </Typography>
-                        <Typography color={medium}>{friends.length} friends</Typography>
+                        <Typography color={medium}>{friends?.length} friends</Typography>
                     </Box>
                 </FlexBetween>
                 <ManageAccountsOutlined />
@@ -141,4 +141,4 @@ const UserWidget = ({ userId }) => {
     );
 };
 
-export default UserWidget;
+export default UserInfo;

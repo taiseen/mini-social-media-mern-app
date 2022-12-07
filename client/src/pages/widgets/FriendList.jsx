@@ -7,7 +7,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import Friend from "components/Friend";
 
 
-const FriendListWidget = ({ userId }) => {
+const FriendList = ({ userId }) => {
 
     const dispatch = useDispatch();
     const { palette } = useTheme();
@@ -50,4 +50,4 @@ const FriendListWidget = ({ userId }) => {
     );
 };
 
-export default FriendListWidget;
+export default FriendList;

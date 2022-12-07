@@ -1,6 +1,6 @@
-export {default as PostsContainerWidget} from './PostsContainerWidget';
-export {default as PostCreationWidget} from './PostCreationWidget';
-export {default as FriendListWidget} from './FriendListWidget';
-export {default as AdvertWidget} from './AdvertWidget';
-export {default as PostWidget} from './PostWidget';
-export {default as UserWidget} from './UserWidget';
+export {default as PostsContainer} from './PostsContainer';
+export {default as NewPostCreate} from './NewPostCreate';
+export {default as FriendList} from './FriendList';
+export {default as Advert} from './Advert';
+export {default as SinglePost} from './SinglePost';
+export {default as UserInfo} from './UserInfo';

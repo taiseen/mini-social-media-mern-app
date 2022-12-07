@@ -1,8 +1,8 @@
-import FriendListWidget from "pages/widgets/FriendListWidget";
-import PostCreationWidget from "pages/widgets/PostCreationWidget";
-import AdvertWidget from "pages/widgets/AdvertWidget";
-import PostsContainerWidget from "pages/widgets/PostsContainerWidget";
-import UserWidget from "pages/widgets/UserWidget";
+import FriendList from "pages/widgets/FriendList";
+import NewPostCreate from "pages/widgets/NewPostCreate";
+import Advert from "pages/widgets/Advert";
+import PostsContainer from "pages/widgets/PostsContainer";
+import UserInfo from "pages/widgets/UserInfo";
 import Navbar from "pages/Navbar";
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -25,24 +25,24 @@ const HomePage = () => {
                 gap="0.5rem"
             >
                 <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-                    <UserWidget userId={_id} />
+                    <UserInfo userId={_id} />
                 </Box>
 
                 <Box
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}
                 >
-                    <PostCreationWidget picturePath={picturePath} />
-                    <PostsContainerWidget userId={_id} />
+                    <NewPostCreate picturePath={picturePath} />
+                    <PostsContainer userId={_id} />
                 </Box>
 
                 {
                     // friend list only show at desktop view...
                     isNonMobileScreens &&
                     <Box flexBasis="26%">
-                        <AdvertWidget />
+                        <Advert />
                         <Box m="2rem 0" />
-                        <FriendListWidget userId={_id} />
+                        <FriendList userId={_id} />
                     </Box>
                 }
             </Box>
