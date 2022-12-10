@@ -1,17 +1,17 @@
 import { ManageAccountsOutlined, EditOutlined, LocationOnOutlined, WorkOutlineOutlined } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useGetUser } from 'hook';
+import { useGetUser } from 'api';
 import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 
-const UserInfo = ({ userId, picturePath : userImg }) => {
+const UserInfo = ({ userId, picturePath: userImg }) => {
 
     const navigate = useNavigate();
 
     const { palette } = useTheme();
-    const { data } = useGetUser(userId); // * backend api call for GET request...
+    const { data } = useGetUser(userId); // 🟩🟩🟩 GET Request...
 
     const dark = palette.neutral.dark;
     const main = palette.neutral.main;
@@ -34,7 +34,8 @@ const UserInfo = ({ userId, picturePath : userImg }) => {
 
     return (
         <WidgetWrapper>
-            {/* FIRST ROW */}
+
+            {/* 1️⃣ ROW */}
             <FlexBetween
                 gap="0.5rem"
                 pb="1.1rem"
@@ -65,7 +66,7 @@ const UserInfo = ({ userId, picturePath : userImg }) => {
             <Divider />
             {/* ========================================================================== */}
 
-            {/* SECOND ROW */}
+            {/* 2️⃣ ROW */}
             <Box p="1rem 0">
                 <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
                     <LocationOnOutlined fontSize="large" sx={{ color: main }} />
@@ -80,7 +81,7 @@ const UserInfo = ({ userId, picturePath : userImg }) => {
             <Divider />
             {/* ========================================================================== */}
 
-            {/* THIRD ROW */}
+            {/* 3️⃣ ROW */}
             <Box p="1rem 0">
                 <FlexBetween mb="0.5rem">
                     <Typography color={medium}>Who's viewed your profile</Typography>
@@ -99,7 +100,7 @@ const UserInfo = ({ userId, picturePath : userImg }) => {
             <Divider />
             {/* ========================================================================== */}
 
-            {/* FOURTH ROW */}
+            {/* 4️⃣ ROW */}
             <Box p="1rem 0">
                 <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
                     Social Profiles

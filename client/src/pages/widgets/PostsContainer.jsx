@@ -1,4 +1,4 @@
-import { useGetAllPost, useGetUserPosts } from '../../hook';
+import { useGetAllPost, useGetUserPosts } from '../../api';
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "redux/features/postSlice";
 import { useEffect } from "react";
@@ -9,8 +9,8 @@ const PostsContainer = ({ userId, isProfile = false }) => {
 
     const dispatch = useDispatch();
 
-    const { data: allPost } = useGetAllPost();              // * backend api call for GET request...
-    const { data: userPosts } = useGetUserPosts(userId);    // * backend api call for GET request...
+    const { data: allPost } = useGetAllPost();              // 🟩🟩🟩 GET Request...
+    const { data: userPosts } = useGetUserPosts(userId);    // 🟩🟩🟩 GET Request...
 
     const posts = useSelector(state => state.post?.posts);
 

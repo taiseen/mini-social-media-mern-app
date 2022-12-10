@@ -6,8 +6,8 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from 'redux/features/postSlice';
-import { userPostDelete } from 'hook';
 import { toast } from 'react-toastify';
+import { userPostDelete } from 'api';
 
 
 const DeletePostDialog = ({ postDeleteModalOpen, setPostDeleteModalOpen, postId }) => {
@@ -15,14 +15,15 @@ const DeletePostDialog = ({ postDeleteModalOpen, setPostDeleteModalOpen, postId 
     const dispatch = useDispatch();
     const posts = useSelector(state => state.post?.posts);
 
-
-    // 🟥🟥🟥 Delete request...
+    
+    // * 🟥🟥🟥 Delete request...
     const handlePostDelete = async () => {
         try {
+            // * 🟥🟥🟥 backend api call for DELETE request...
             const { status, data } = await userPostDelete(postId);
 
             if (status === 200) {
-                // update ui by removing this deleted post...
+                // * update ui by removing this deleted post...
                 const updatedPost = posts.filter(post => post._id !== postId)
                 dispatch(setPosts({ posts: updatedPost }));
             }

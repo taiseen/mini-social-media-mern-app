@@ -1,6 +1,6 @@
 import { loginInitValues, registerInitValues, loginSchema, registerSchema } from "./value&validation";
 import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from "@mui/material";
-import { userLogin, userRegistration } from '../../hook';
+import { userLogin, userRegistration } from '../../api';
 import { setLogin } from "redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -29,7 +29,7 @@ const Form = () => {
     });
 
 
-    // * backend api call for POST request...
+    // 🟨🟨🟨 POST request...
     const register = async (values, onSubmitProps) => {
 
         // this allows us to send form info with image
@@ -40,6 +40,7 @@ const Form = () => {
         formData.append("picturePath", values.picture.name);
 
         try {
+            // 🟨🟨🟨 backend api call for POST request...
             const savedUserResponse = await userRegistration(formData);
             onSubmitProps.resetForm();
 
@@ -53,10 +54,11 @@ const Form = () => {
         }
     };
 
-    // * backend api call for POST request...
+    // 🟨🟨🟨 POST request...
     const login = async (values, onSubmitProps) => {
 
         try {
+            // 🟨🟨🟨 backend api call for POST request...
             const { data } = await userLogin(values);
             onSubmitProps.resetForm();
 

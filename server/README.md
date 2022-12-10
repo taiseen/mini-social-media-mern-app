@@ -44,12 +44,12 @@ PORT = 3001
 
 <br/>
 
-## NodeJs server side basic data flow
-<img src="./public/nodeJsDataFlow.png" />
+## NodeJs | Backend Basic Data Flow...
+<img src="./public/backendDataFlow.png" />
 
 <br/>
 
-## Data Table Relationships
+## Database Table Relationship...
 <img src="./public/dataTableRelation.png" />
 
 <br/>

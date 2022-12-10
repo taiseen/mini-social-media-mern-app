@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "redux/features/authSlice";
-import { useGetFriends } from "hook";
+import { useGetFriends } from "api";
 import { useEffect } from "react";
 import WidgetWrapper from "components/WidgetWrapper";
 import Friend from "components/Friend";
@@ -11,7 +11,7 @@ const FriendList = ({ userId }) => {
 
     const dispatch = useDispatch();
     const { palette } = useTheme();
-    const { data } = useGetFriends(userId); // * backend api call for GET request...
+    const { data } = useGetFriends(userId); // 🟩🟩🟩 GET Request...
     const friends = useSelector(state => state.auth.user.friends);
 
     useEffect(() => {

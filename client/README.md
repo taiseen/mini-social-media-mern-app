@@ -29,7 +29,7 @@
 |1 | index         | basic config for react + redux store       |
 |2 | App.js        | total app routing + auth + theme setup     |
 |3 | components    | all reusable ui components...              |
-|4 | hook          | all REST API request + auth token add in request header |
+|4 | api          | all REST API request + auth token add in request header |
 |5 | pages         | pages/ui for different URL accessing       |
 |6 | redux         | global state data available here accessing |
 |7 | styles        | UI level custom css + theme configuration  |
@@ -50,4 +50,7 @@ REACT_APP_SERVER_URL = http://localhost:3001/
 * Access redux store from non react components or vanilla js files.
 * Inside `.env` file variables must start with `REACT_APP_`, then its work.
 
+<br />
 
+## ReactJs | Frontend Basic Data Flow...
+<img src="./public/frontendDataFlow.png" />

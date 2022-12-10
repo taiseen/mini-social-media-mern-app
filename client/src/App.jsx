@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { themeSettings } from "./styles/theme";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import ProfilePage from "pages/ProfilePage";
+import UserProfilePage from "pages/UserProfilePage";
 import LoginPage from "pages/loginPage";
 import HomePage from "pages/HomePage";
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,7 +37,7 @@ function App() {
 
             <Route
               path="/profile/:userId"
-              element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
+              element={isAuth ? <UserProfilePage /> : <Navigate to="/" />}
             />
 
           </Routes>

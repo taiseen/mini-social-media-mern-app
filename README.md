@@ -29,12 +29,17 @@
 
 <br/>
 
-## NodeJs server side basic data flow
-<img src="./server/public/nodeJsDataFlow.png" />
+## ReactJs | Frontend Basic Data Flow...
+<img src="./client/public/frontendDataFlow.png" />
 
 <br/>
 
-## Data Table Relationships
+## NodeJs | Backend Basic Data Flow...
+<img src="./server/public/backendDataFlow.png" />
+
+<br/>
+
+## Database Table Relationship...
 <img src="./server/public/dataTableRelation.png" />
 
 <br/>

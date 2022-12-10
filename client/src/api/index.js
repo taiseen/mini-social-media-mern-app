@@ -21,7 +21,7 @@ api.interceptors.request.use(req => {
 
 
 
-const useFetch = (endPoint) => {
+const useFetch = endPoint => {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true)
@@ -58,7 +58,7 @@ const useFetch = (endPoint) => {
 
 // GET Requests...
 // 🟩🟩🟩🟩🟩🟩
-export const useGetUser = userId => useFetch('/users/' + userId);
+export const useGetUser = userId => useFetch(`/users/${userId}`);
 export const useGetFriends = userId => useFetch(`/users/${userId}/friends`);
 
 export const useGetAllPost = _ => useFetch('/posts');
@@ -78,7 +78,6 @@ export const postLike = (postId, userId) => api.patch(`/posts/${postId}/like`, {
 export const addRemoveFriend = (userId, friendId) => api.patch(`/users/${userId}/${friendId}`);
 
 
-// PATCH Requests...
+// DELETE Request...
 // 🟥🟥🟥🟥🟥🟥
 export const userPostDelete = postId => api.delete(`/posts/${postId}`);
-

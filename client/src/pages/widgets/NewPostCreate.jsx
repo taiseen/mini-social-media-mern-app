@@ -7,7 +7,7 @@ import WidgetWrapper from "components/WidgetWrapper";
 import FlexBetween from "components/FlexBetween";
 import UserImage from "components/UserImage";
 import Dropzone from "react-dropzone";
-import { userPostCreation } from '../../hook/index';
+import { userPostCreation } from '../../api/index';
 
 
 const NewPostCreate = ({ picturePath }) => {
@@ -25,7 +25,7 @@ const NewPostCreate = ({ picturePath }) => {
     const mediumMain = palette.neutral.mediumMain;
 
 
-    // 🟨🟨🟨 POST request...
+    // 🟨🟨🟨 POST Request...
     const handleNewPostCreation = async () => {
 
         const formData = new FormData();
@@ -37,7 +37,7 @@ const NewPostCreate = ({ picturePath }) => {
         }
 
         try {
-            // 🟨🟨🟨 backend api call for POST request...
+            // 🟨🟨🟨 backend api call for POST Request...
             const { data } = await userPostCreation(formData);
             dispatch(setPosts({ posts: data }));
             setImage(null);

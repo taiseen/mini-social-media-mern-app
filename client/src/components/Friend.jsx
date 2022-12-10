@@ -3,7 +3,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "redux/features/authSlice";
 import { useNavigate } from "react-router-dom";
-import { addRemoveFriend } from './../hook/index';
+import { addRemoveFriend } from './../api/index';
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 
@@ -26,10 +26,10 @@ const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
 
     // console.log(isFriend)
 
-    // 🟨🟨🟨 Patch Request...
+    // 🟨🟨🟨 PATCH Request...
     const patchFriend = async () => {
         try {
-            // 🟨🟨🟨 backend api call for Patch request...
+            // 🟨🟨🟨 backend api call for PATCH request...
             const { data } = await addRemoveFriend(_id, postUserId);
             dispatch(setFriends({ friends: data }));
         } catch (error) {

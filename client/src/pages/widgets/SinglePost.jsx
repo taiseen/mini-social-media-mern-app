@@ -3,7 +3,7 @@ import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "redux/features/postSlice";
 import { useState } from "react";
-import { postLike } from "hook";
+import { postLike } from "api";
 import WidgetWrapper from "components/WidgetWrapper";
 import DeletePostDialog from "./DeletePostDialog";
 import FlexBetween from "components/FlexBetween";
@@ -36,9 +36,10 @@ const SinglePost = ({
     const main = palette.neutral.main;
 
 
-    // 🟨🟨🟨 Update request...
+    // 🟨🟨🟨 PATCH Request...
     const likeUserPost = async () => {
         try {
+            // 🟨🟨🟨 backend api call for PATCH Request...
             const { data } = await postLike(postId, loggedInUserId);
             dispatch(setPost({ post: data }));
         } catch (error) {
@@ -137,7 +138,7 @@ const SinglePost = ({
             }
 
             {
-                // post delete confirmation modal...
+                // ❌ post delete confirmation modal... ❌
                 postDeleteModalOpen &&
                 <DeletePostDialog
                     postId={postId}
