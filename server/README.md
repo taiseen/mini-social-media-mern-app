@@ -44,38 +44,40 @@ PORT = 3001
 
 <br/>
 
+
+## File & Folder hierarchy 
 ```
 🟨
 server
-├── connection
+├── connection                          🟨 Database Connections 🟨
 |   └── mongoDB.js
 |
-├── controllers
+├── controllers                         🟨 Database Query Functions 🟨
 |   ├── auth
-|   |   ├── login.js
-|   |   └── registration.js
-|   |
-|   ├── posts
-|   |   ├── createPost.js
-|   |   ├── deleteUserPost.js
-|   |   ├── getFeedPosts.js
-|   |   ├── getUserPosts.js
-|   |   └── likePost.js
-|   |
-|   ├── users
-|   |   ├── addRemoveFriend.js
-|   |   ├── getUser.js
-|   |   └── getUserFriends.js
-|   |
-|   └──welcomeMessage.js
-|
-├── data
-|   └── index.js
-|
-├── middleware
+|   |   ├── login.js    
+|   |   └── registration.js 
+|   |   
+|   ├── posts   
+|   |   ├── createPost.js   
+|   |   ├── deleteUserPost.js   
+|   |   ├── getFeedPosts.js 
+|   |   ├── getUserPosts.js 
+|   |   └── likePost.js 
+|   |   
+|   ├── users   
+|   |   ├── addRemoveFriend.js  
+|   |   ├── getUser.js  
+|   |   └── getUserFriends.js   
+|   |   
+|   └──welcomeMessage.js    
+|   
+├── data    
+|   └── index.js    
+|   
+├── middleware  for                     🟨 Route Gard for protected API call by auth... 🟨  
 |   └── verifyToken.js
-|
-├── models
+|   
+├── models                              🟨 Database Schema 🟨  
 |   ├── Post.js
 |   └── User.js
 |
@@ -91,7 +93,7 @@ server
 |   ├── jwt.jpg
 |   └── server.png
 |
-├── routes
+├── routes                              🟨 REST API, URL Route for accessing data 🟨  
 |   ├── auth.js
 |   ├── posts.js
 |   └── users.js
@@ -100,7 +102,7 @@ server
 |   └── fileStorage.js
 |
 ├── .env
-├── index.js
+├── index.js                            🟨 Main Server File 🟨  
 ├── package.json
 ├── README.md
 └── yarn.lock

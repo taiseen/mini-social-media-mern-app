@@ -50,12 +50,7 @@ REACT_APP_SERVER_URL = http://localhost:3001/
 * Access redux store from non react components or vanilla js files.
 * Inside `.env` file variables must start with `REACT_APP_`, then its work.
 
-<br />
-
-## ReactJs | Frontend Basic Data Flow...
-<img src="./public/frontendDataFlow.png" />
-
-
+## File & Folder hierarchy 
 ```
 🟨
 src
@@ -105,3 +100,8 @@ src
 └── index.js
 🟨
 ```
+
+<br />
+
+## ReactJs | Frontend Basic Data Flow...
+<img src="./public/frontendDataFlow.png" />
