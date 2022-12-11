@@ -1,11 +1,7 @@
-import FriendList from "pages/widgets/FriendList";
-import NewPostCreate from "pages/widgets/NewPostCreate";
-import Advert from "pages/widgets/Advert";
-import PostsContainer from "pages/widgets/PostsContainer";
-import UserInfo from "pages/widgets/UserInfo";
-import Navbar from "pages/Navbar";
+import { PostsContainer, NewPostCreate, FriendList, UserInfo, Advert } from "./widgets";
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
+import Navbar from "pages/Navbar";
 
 
 const HomePage = () => {

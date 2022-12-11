@@ -44,6 +44,71 @@ PORT = 3001
 
 <br/>
 
+```
+🟨
+server
+├── connection
+|   └── mongoDB.js
+|
+├── controllers
+|   ├── auth
+|   |   ├── login.js
+|   |   └── registration.js
+|   |
+|   ├── posts
+|   |   ├── createPost.js
+|   |   ├── deleteUserPost.js
+|   |   ├── getFeedPosts.js
+|   |   ├── getUserPosts.js
+|   |   └── likePost.js
+|   |
+|   ├── users
+|   |   ├── addRemoveFriend.js
+|   |   ├── getUser.js
+|   |   └── getUserFriends.js
+|   |
+|   └──welcomeMessage.js
+|
+├── data
+|   └── index.js
+|
+├── middleware
+|   └── verifyToken.js
+|
+├── models
+|   ├── Post.js
+|   └── User.js
+|
+├── public
+|   ├── assets
+|   |   ├── data-flow.png
+|   |   ├── info1.jpeg
+|   |   └── all images...
+|   |
+|   ├── backendDataFlow.png
+|   ├── dataTableRelation.png
+|   ├── fav.ico
+|   ├── jwt.jpg
+|   └── server.png
+|
+├── routes
+|   ├── auth.js
+|   ├── posts.js
+|   └── users.js
+|
+├── storage
+|   └── fileStorage.js
+|
+├── .env
+├── index.js
+├── package.json
+├── README.md
+└── yarn.lock
+🟨
+```
+
+<br/>
+
 ## NodeJs | Backend Basic Data Flow...
 <img src="./public/backendDataFlow.png" />
 

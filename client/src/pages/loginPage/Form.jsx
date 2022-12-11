@@ -42,6 +42,8 @@ const Form = () => {
         try {
             // 🟨🟨🟨 backend api call for POST request...
             const savedUserResponse = await userRegistration(formData);
+
+            // 🧹🧹🧹 Form Fields are Reset by Formik lib...
             onSubmitProps.resetForm();
 
             if (savedUserResponse.statusText === 'Created') {
@@ -60,6 +62,8 @@ const Form = () => {
         try {
             // 🟨🟨🟨 backend api call for POST request...
             const { data } = await userLogin(values);
+
+            // 🧹🧹🧹 Form Fields are Reset by Formik lib...
             onSubmitProps.resetForm();
 
             // set user info at redux global store...

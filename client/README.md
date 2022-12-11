@@ -54,3 +54,54 @@ REACT_APP_SERVER_URL = http://localhost:3001/
 
 ## ReactJs | Frontend Basic Data Flow...
 <img src="./public/frontendDataFlow.png" />
+
+
+```
+🟨
+src
+├── api
+|   └── index.js
+|
+├── components
+|   ├── FlexBetween.jsx
+|   ├── Friend.jsx
+|   ├── UserImage.jsx
+|   └── WidgetWrapper.jsx
+|
+├── pages
+|   ├── loginPage
+|   |   ├── Form.jsx
+|   |   ├── index.jsx
+|   |   └── value&validation.js
+|   |
+|   ├── widgets
+|   |   ├── Advert.jsx
+|   |   ├── DeletePostDialog.jsx
+|   |   ├── FriendList.jsx
+|   |   ├── index.js
+|   |   ├── NewPostCreate.jsx
+|   |   ├── PostsContainer.jsx
+|   |   ├── SinglePost.jsx
+|   |   └── UserInfo.jsx
+|   |
+|   ├── HomePage.jsx
+|   ├── Navbar.jsx
+|   └── UserProfilePage.jsx
+|
+├── redux
+|   ├──features
+|   |  ├── authSlice.js
+|   |  ├── postSlice.js
+|   |  └── themeSlice.js
+|   |
+|   ├── index.js
+|   └── rootReducer.js
+|
+├── styles
+|   ├── index.css
+|   └── theme.js
+|
+├── App.jsx
+└── index.js
+🟨
+```
