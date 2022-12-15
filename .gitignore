@@ -10,3 +10,5 @@ build
 client/build
 
 server/public/assets
+
+.idea

@@ -27,6 +27,12 @@
 12. Multer
 13. Multer GridFs Storage
 
+
+<br />
+
+## Frontend Component Tree Structure...
+<img src="./client/public/appTree.png" />
+
 <br/>
 
 ## ReactJs | Frontend Basic Data Flow...

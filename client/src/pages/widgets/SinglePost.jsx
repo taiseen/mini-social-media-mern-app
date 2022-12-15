@@ -50,6 +50,7 @@ const SinglePost = ({
 
     return (
         <WidgetWrapper m="2rem 0">
+            
             <Friend
                 name={name}
                 subtitle={location}

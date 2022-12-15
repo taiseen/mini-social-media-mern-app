@@ -8,29 +8,29 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 
 
-const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
+const Friend = ({ postUserId, friendId, name, subtitle, userPicturePath }) => {
 
     const { palette } = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { _id } = useSelector(state => state.auth.user);
-    const friends = useSelector(state => state.auth.user?.friends);
+    const { _id } = useSelector(state => state.auth.user);          // get login user ID
+    const friends = useSelector(state => state.auth.user?.friends); // get user friend list [array]
 
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
     const primaryDark = palette.primary.dark;
     const primaryLight = palette.primary.light;
 
-    const isFriend = friends?.find(friend => friend?._id === postUserId);
+    const isFriend = Boolean(friends?.find(friend => friend?._id === (postUserId || friendId)));
 
-    // console.log(isFriend)
 
     // 🟨🟨🟨 PATCH Request...
-    const patchFriend = async () => {
+    const addRemoveFriendRequest = async (postUserId) => {
+        console.log(postUserId);
         try {
             // 🟨🟨🟨 backend api call for PATCH request...
-            const { data } = await addRemoveFriend(_id, postUserId);
+            const { data } = await addRemoveFriend(_id, postUserId || friendId);
             dispatch(setFriends({ friends: data }));
         } catch (error) {
             console.log(error);
@@ -39,13 +39,16 @@ const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
     return (
         <FlexBetween>
             <FlexBetween gap="1rem">
+
                 <UserImage image={userPicturePath} size="55px" />
+
                 <Box
                     onClick={() => {
-                        navigate(`/profile/${postUserId}`);
+                        navigate(`/profile/${postUserId || friendId}`);
                         navigate(0); // refresh again this url...
                     }}
                 >
+             
                     <Typography
                         color={main}
                         variant="h5"
@@ -63,14 +66,15 @@ const Friend = ({ postUserId, name, subtitle, userPicturePath }) => {
                         {subtitle}
                     </Typography>
                 </Box>
+
             </FlexBetween>
 
             {
-                // you can't send friend request to yourself...
+                // ⛔⛔⛔ you can't send friend request to yourself...
                 postUserId === _id
                     ? null
                     : <IconButton
-                        onClick={() => patchFriend()}
+                        onClick={() => addRemoveFriendRequest(postUserId)}
                         sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
                     >
                         {

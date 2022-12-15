@@ -5,7 +5,6 @@ const getUserFriends = async (req, res) => {
 
     try {
         const { id } = req.params;
-        console.log(id)
 
         const user = await User.findById(id);
 
@@ -20,7 +19,7 @@ const getUserFriends = async (req, res) => {
                 return { _id, firstName, lastName, occupation, location, picturePath };
             }
         );
-            console.log(formattedFriends)
+
         res.status(200).json(formattedFriends);
 
     } catch (err) {

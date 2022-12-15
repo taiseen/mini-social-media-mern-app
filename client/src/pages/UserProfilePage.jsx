@@ -1,5 +1,5 @@
 import { FriendList, NewPostCreate, PostsContainer, UserInfo } from "./widgets";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, CircularProgress, useMediaQuery } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useGetUser } from "api";
 import Navbar from "pages/Navbar";
@@ -14,12 +14,25 @@ const UserProfilePage = () => {
 
     const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
-    if (loading) return <p>Data loading...</p>;
+    if (loading) {
+        return (
+            <Box
+                width='100%'
+                height='100%'
+                display='flex'
+                justifyContent="center"
+                alignItems='center'
+            >
+                <CircularProgress color="inherit" />
+            </Box>);
+    }
     if (error) return <p>Error happen...</p>;
 
     return (
         <Box>
+
             <Navbar />
+
             <Box
                 width="100%"
                 padding="2rem 6%"
@@ -31,7 +44,7 @@ const UserProfilePage = () => {
                     <UserInfo userId={userId} picturePath={data?.picturePath} />
 
                     <Box m="2rem 0" />
-                    
+
                     <FriendList userId={userId} />
                 </Box>
 

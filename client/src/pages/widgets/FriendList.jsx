@@ -36,7 +36,7 @@ const FriendList = ({ userId }) => {
                 {
                     friends?.map(friend => (
                         <Friend
-                            key={friend._id}
+                            key={friend?._id}
                             friendId={friend._id}
                             subtitle={friend.occupation}
                             userPicturePath={friend.picturePath}

@@ -101,6 +101,14 @@ src
 🟨
 ```
 
+
+<br />
+
+## Frontend Component Tree Structure...
+<img src="./public/appTree.png" />
+
+
+
 <br />
 
 ## ReactJs | Frontend Basic Data Flow...

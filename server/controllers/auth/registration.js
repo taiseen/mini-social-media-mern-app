@@ -41,7 +41,6 @@ const registration = async (req, res) => {
 
         // save user at mongodb database...
         const savedUser = await newUser.save();
-        console.log(savedUser)
 
         // send user info at frontend...
         res.status(201).json(savedUser);
